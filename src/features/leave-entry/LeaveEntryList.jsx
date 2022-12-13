@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
-import { Paper,Table,TableContainer,TableHead,TableRow,TableCell,TableBody } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { Paper,Table,TableContainer,TableHead,TableRow,TableCell,TableBody, Button } from '@mui/material'
+import { useSelector,useDispatch } from 'react-redux'
+import getLeaveEntries from './leaveEntrySlice'
 
 const LeaveEntryList = () => {
     const leaveDayEntries= useSelector((state)=>state.leaveEntries)
@@ -9,9 +10,12 @@ const LeaveEntryList = () => {
 
     // console.log(leaveDayEntries)
 
+    const dispatch = useDispatch()
+
 
   return (
     <>
+        <Button onClick={e=>dispatch(getLeaveEntries)}>Get Leave</Button>
         <Paper style={{margin:'1rem', padding:'1rem', width:'70%'}}>
             <h2 style={{margin:0}}>Leave Types List</h2><br/><hr/>
           <TableContainer component={Paper}>
