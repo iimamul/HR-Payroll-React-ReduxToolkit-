@@ -1,15 +1,15 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import {fetchLeaveEntries} from './leaveEntryAPI'
-import axios from 'axios'
+// import axios from 'axios'
 
 const initialState = [
         {leaveName: "Casual",allowedDays:10},
         {leaveName: "Sick",allowedDays:14}
     ]
 
-export const getLeaveEntries = createAsyncThunk("leaveEntries/getLeaveEntries", async () => {
+export const getAllLeaveEntries = createAsyncThunk("leaveEntries/getLeaveEntries", async () => {
   const data= await fetchLeaveEntries()
-  console.log(data)
+  console.log('data')
   return data
 });
 
@@ -26,19 +26,19 @@ export const leaveEntrySlice = createSlice({
     //   state.value += action.payload
     // },
   },
-  extraReducers: {
-    [getLeaveEntries.pending]: (state, action) => {
-      state.status = "loading";
-    },
-    [getLeaveEntries.fulfilled]: (state, action) => {
-      state.status = "fulfilled";
-      state.list = action.payload;
-      console.log(action)
-    },
-    [getLeaveEntries.rejected]: (state, action) => {
-      state.status = "failed";
-    }
-  }
+  // extraReducers: {
+  //   [getLeaveEntries.pending]: (state, action) => {
+  //     state.status = "loading";
+  //   },
+  //   [getLeaveEntries.fulfilled]: (state, action) => {
+  //     state.status = "fulfilled";
+  //     state.list = action.payload;
+  //     console.log(action)
+  //   },
+  //   [getLeaveEntries.rejected]: (state, action) => {
+  //     state.status = "failed";
+  //   }
+  // }
 })
 
 // Action creators are generated for each case reducer function

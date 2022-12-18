@@ -18,7 +18,7 @@ export function fetchLeaveEntries(){
             })
 
 
-  return data
+  return data.products
 }
   
 
