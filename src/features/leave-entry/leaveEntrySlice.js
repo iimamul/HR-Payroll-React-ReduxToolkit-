@@ -2,15 +2,25 @@ import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import {fetchLeaveEntries} from './leaveEntryAPI'
 // import axios from 'axios'
 
-const initialState = [
-        {leaveName: "Casual",allowedDays:10},
-        {leaveName: "Sick",allowedDays:14}
-    ]
+const initialState = {
+  leaves: [
+            {leaveName: "Casual",allowedDays:10},
+            {leaveName: "Sick",allowedDays:14}
+          ],
+  status: 'idle',
+  error: null
+}
 
 export const getAllLeaveEntries = createAsyncThunk("leaveEntries/getLeaveEntries", async () => {
-  const data= await fetchLeaveEntries()
-  console.log('data')
-  return data
+  try{
+    const data= await fetchLeaveEntries()
+    console.log('data')
+    return data
+  } 
+  catch(err){
+    return err.message
+  }
+
 });
 
 
@@ -19,31 +29,34 @@ export const leaveEntrySlice = createSlice({
   initialState,
   reducers: {
     addLeave: (state,action) => {
-        state.push(action.payload)
+        state.leaves.push(action.payload)
         console.log(action.payload)
     }
-    // incrementByAmount: (state, action) => {
-    //   state.value += action.payload
-    // },
   },
-  // extraReducers: {
-  //   [getLeaveEntries.pending]: (state, action) => {
-  //     state.status = "loading";
-  //   },
-  //   [getLeaveEntries.fulfilled]: (state, action) => {
-  //     state.status = "fulfilled";
-  //     state.list = action.payload;
-  //     console.log(action)
-  //   },
-  //   [getLeaveEntries.rejected]: (state, action) => {
-  //     state.status = "failed";
-  //   }
-  // }
+  extraReducers(builder){
+    builder
+      .addCase(getAllLeaveEntries.pending,(state, action) => {
+        state.status = "loading";
+        console.log(state.status)
+      })
+      .addCase(getAllLeaveEntries.fulfilled,(state, action) => {
+        state.status = "Succeeded";
+        state.leaves = action.payload;
+        console.log(action)
+        console.log(state.status)
+      })
+      .addCase(getAllLeaveEntries.rejected,(state, action) => {
+        state.status = "failed";
+        state.error = action.error.message
+        console.log(state.status)
+      })
+  }
 })
 
 // Action creators are generated for each case reducer function
+// export const selectAllLeaves =(state)=>state.leaves
+
 export const { addLeave } = leaveEntrySlice.actions
 
 export default leaveEntrySlice.reducer
 
-// export const selectAllLeaveEntries =(state)=>state.leaveEntries.value

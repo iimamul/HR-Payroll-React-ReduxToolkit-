@@ -4,15 +4,13 @@ import { useSelector,useDispatch } from 'react-redux'
 import {getAllLeaveEntries} from './leaveEntrySlice'
 
 const LeaveEntryList = () => {
-    const leaveDayEntries= useSelector((state)=>state.leaveEntries)
-    const headers=[{name:'Leave Name',id:1},{name:'Allowed Days',id:2}]
-    // const [rowVal,setRowVal]=useState([{name:'kuddus', age:12},{name:'belal', age:15}])
-
-    // console.log(leaveDayEntries)
-
+    const leaveDayEntries= useSelector((state)=>state.leaveEntries.leaves)
     const dispatch = useDispatch()
 
+    // console.log(leaveDayEntries.value)
+    const headers=[{name:'Leave Name',id:1},{name:'Allowed Days',id:2}]
 
+    // const [rowVal,setRowVal]=useState([{name:'kuddus', age:12},{name:'belal', age:15}])
   return (
     <>
         <Button onClick={e=>dispatch(getAllLeaveEntries())}>Get Leave</Button>
