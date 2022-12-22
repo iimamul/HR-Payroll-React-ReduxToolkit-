@@ -4,8 +4,8 @@ import {fetchLeaveEntries} from './leaveEntryAPI'
 
 const initialState = {
   leaves: [
-            {leaveName: "Casual",allowedDays:10},
-            {leaveName: "Sick",allowedDays:14}
+            // {leaveName: "Casual",allowedDays:10},
+            // {leaveName: "Sick",allowedDays:14}
           ],
   status: 'idle',
   error: null
@@ -14,7 +14,7 @@ const initialState = {
 export const getAllLeaveEntries = createAsyncThunk("leaveEntries/getLeaveEntries", async () => {
   try{
     const data= await fetchLeaveEntries()
-    console.log('data')
+    // console.log(data)
     return data
   } 
   catch(err){
@@ -30,7 +30,7 @@ export const leaveEntrySlice = createSlice({
   reducers: {
     addLeave: (state,action) => {
         state.leaves.push(action.payload)
-        console.log(action.payload)
+        // console.log(action.payload)
     }
   },
   extraReducers(builder){
@@ -40,15 +40,14 @@ export const leaveEntrySlice = createSlice({
         console.log(state.status)
       })
       .addCase(getAllLeaveEntries.fulfilled,(state, action) => {
-        state.status = "Succeeded";
-        state.leaves = action.payload;
-        console.log(action)
-        console.log(state.status)
+        state.status = "succeeded";
+        console.log(action.status)
+        state.leaves=action.payload
       })
       .addCase(getAllLeaveEntries.rejected,(state, action) => {
         state.status = "failed";
         state.error = action.error.message
-        console.log(state.status)
+        // console.log(state.status)
       })
   }
 })

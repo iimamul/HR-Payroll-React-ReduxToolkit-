@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect} from 'react'
 import { Paper,Table,TableContainer,TableHead,TableRow,TableCell,TableBody, Button } from '@mui/material'
 import { useSelector,useDispatch } from 'react-redux'
 import {getAllLeaveEntries} from './leaveEntrySlice'
@@ -7,13 +7,18 @@ const LeaveEntryList = () => {
     const leaveDayEntries= useSelector((state)=>state.leaveEntries.leaves)
     const dispatch = useDispatch()
 
-    // console.log(leaveDayEntries.value)
-    const headers=[{name:'Leave Name',id:1},{name:'Allowed Days',id:2}]
+    // console.log(leaveDayEntries)
+    const headers=[{name:'Leave Name',id:1},{name:'Balance Days',id:2}]
+
+    useEffect(() => {
+        dispatch(getAllLeaveEntries())
+    }, [])
+    
 
     // const [rowVal,setRowVal]=useState([{name:'kuddus', age:12},{name:'belal', age:15}])
   return (
     <>
-        <Button onClick={e=>dispatch(getAllLeaveEntries())}>Get Leave</Button>
+        {/* <Button onClick={e=>dispatch(getAllLeaveEntries())}>Get Leave</Button> */}
         <Paper style={{margin:'1rem', padding:'1rem', width:'70%'}}>
             <h2 style={{margin:0}}>Leave Types List</h2><br/><hr/>
           <TableContainer component={Paper}>
@@ -36,7 +41,7 @@ const LeaveEntryList = () => {
                   >
                     <TableCell align="right">{index+1}</TableCell>
                     <TableCell align="right">{leave.leaveName}</TableCell>
-                    <TableCell align="right">{leave.allowedDays}</TableCell>
+                    <TableCell align="right">{leave.balanceDays}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -12,7 +12,7 @@ import { addLeave } from './leaveEntrySlice'
 
 const initialValue={
   leaveName:'',
-  allowedDays:0
+  balanceDays:0
 }
 
 const LeaveEntryInputs = () => {
@@ -31,9 +31,9 @@ const LeaveEntryInputs = () => {
       leaveName: Yup.string()
             .max(10, 'Leave Name must be 10 charcter or less')
             .required('Leave Name is Required'),
-      allowedDays: Yup.number()
+      balanceDays: Yup.number()
             .required('Allowed days is Required')
-            .max(20,'Max value should be 20'),
+            .max(20,'Max value should be 30'),
     })
   })
 
@@ -54,15 +54,15 @@ const LeaveEntryInputs = () => {
             {formik.touched.leaveName && formik.errors.leaveName ? ( <div>{formik.errors.leaveName}</div>) : null}
             
             <InputField 
-              name='allowedDays' 
+              name='balanceDays' 
               className='inputBox'
               type='number' 
-              label='Allowed Days' 
+              label='Balance Days' 
               onChange={formik.handleChange}
               // onBlur={formik.handleBlur} 
-              value={formik.values.allowedDays}
+              value={formik.values.balanceDays}
             /> 
-            {formik.touched.allowedDays && formik.errors.allowedDays ? ( <div>{formik.errors.allowedDays}</div>) : null}
+            {formik.touched.balanceDays && formik.errors.balanceDays ? ( <div>{formik.errors.balanceDays}</div>) : null}
 
             <div className="btnRow" style={{display:'flex'}}>
               <SaveButton type='submit' style={{marginRight:'1rem'}}>Save</SaveButton>
