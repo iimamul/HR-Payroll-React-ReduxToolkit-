@@ -27,7 +27,7 @@ export function addNewLeaveBalance(newLeave){
   const data=api.post('/', newLeave)
                 .then((function (response) {
                   // console.log(response.data)
-                  return newLeave
+                  return response.data
                 }))
                 .catch(function (error) {
                   console.log(error)
