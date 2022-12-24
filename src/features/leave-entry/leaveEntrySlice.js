@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
-import {fetchLeaveEntries} from './leaveEntryAPI'
+import {fetchLeaveEntries,addNewLeaveBalance} from './leaveEntryAPI'
 // import axios from 'axios'
 
 const initialState = {
@@ -23,15 +23,27 @@ export const getAllLeaveEntries = createAsyncThunk("leaveEntries/getLeaveEntries
 
 });
 
+export const addNewLeave = createAsyncThunk("leaveEntries/addNewLeave", async (newLeave) => {
+  try{
+    console.log(newLeave)
+    const data= await addNewLeaveBalance(newLeave)
+    // console.log(newLeave)
+    return data
+  } 
+  catch(err){
+    return err.message
+  }
+});
+
 
 export const leaveEntrySlice = createSlice({
   name: 'leaveEntriesSlc',
   initialState,
   reducers: {
-    addLeave: (state,action) => {
-        state.leaves.push(action.payload)
-        // console.log(action.payload)
-    }
+    // addLeave: (state,action) => {
+    //     state.leaves.push(action.payload)
+    //     // console.log(action.payload)
+    // }
   },
   extraReducers(builder){
     builder
@@ -41,13 +53,19 @@ export const leaveEntrySlice = createSlice({
       })
       .addCase(getAllLeaveEntries.fulfilled,(state, action) => {
         state.status = "succeeded";
-        console.log(action.status)
+        // console.log(action.status)
         state.leaves=action.payload
       })
       .addCase(getAllLeaveEntries.rejected,(state, action) => {
         state.status = "failed";
         state.error = action.error.message
         // console.log(state.status)
+      })
+      .addCase(addNewLeave.fulfilled,(state, action) => {
+        // action.payload.balanceDays= Number(action.payload.balanceDays)
+
+        state.leaves.push(action.payload)
+        // console.log(action.payload)
       })
   }
 })

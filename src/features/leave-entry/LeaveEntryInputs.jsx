@@ -6,8 +6,9 @@ import { Paper} from '@mui/material'
 import { useFormik } from 'formik'
 import * as Yup from 'yup';
 
-import { useSelector, useDispatch } from 'react-redux'
-import { addLeave } from './leaveEntrySlice'
+import { useDispatch } from 'react-redux'
+// import { addLeave } from './leaveEntrySlice'
+import { addNewLeave } from './leaveEntrySlice'
 
 
 const initialValue={
@@ -17,15 +18,26 @@ const initialValue={
 
 const LeaveEntryInputs = () => {
 
-  const leaveEntryList = useSelector((state) => state.leaveEntries)
+  // const leaveEntryList = useSelector((state) => state.leaveEntries)
   const dispatch = useDispatch()
 
 
   const formik=useFormik({
     initialValues:initialValue,
-    onSubmit:(values)=>{
-        dispatch(addLeave(formik.values))
-        formik.resetForm(initialValue)
+    onSubmit:()=>{
+      try {
+            // console.log(formik.values)
+            // dispatch(addLeave(formik.values))
+            // leaveEntryList.status="loading"
+            dispatch(addNewLeave(formik.values))
+            formik.resetForm(initialValue)
+      } catch (err) {
+            console.error('Failed to save the post', err)
+        
+      } finally {
+            // leaveEntryList.status='idle'
+      }
+
     },
     validationSchema: Yup.object({
       leaveName: Yup.string()
