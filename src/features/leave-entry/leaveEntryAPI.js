@@ -38,4 +38,19 @@ export function addNewLeaveBalance(newLeave){
   return data
 }
 
+export function updateLeaveBalance(leave){
+  // console.log(newLeave)
+  const data=api.put('/'+leave.id, leave)
+                .then((function (response) {
+                  // console.log(response.data)
+                  return leave
+                }))
+                .catch(function (error) {
+                  console.log(error)
+
+                })
+  // console.log(data)
+
+  return data
+}
 

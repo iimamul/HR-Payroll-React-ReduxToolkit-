@@ -1,18 +1,24 @@
 import React,{useEffect} from 'react'
-import { Paper,Table,TableContainer,TableHead,TableRow,TableCell,TableBody, Button } from '@mui/material'
+import { Paper,Table,TableContainer,TableHead,TableRow,TableCell,TableBody } from '@mui/material'
 import { useSelector,useDispatch } from 'react-redux'
 import {getAllLeaveEntries} from './leaveEntrySlice'
+import {EditButton} from '../../components/form-field/FormButton'
+import { LeaveEntryContext } from './LeaveEntryContext'
+import { useContext } from 'react'
 
 const LeaveEntryList = () => {
     const leaveDayEntries= useSelector((state)=>state.leaveEntriesStored)
     const dispatch = useDispatch()
 
-    const headers=[{name:'Leave Name',id:1},{name:'Balance Days',id:2}]
+    const headers=[{name:'Leave Name',id:1},{name:'Balance Days',id:2},{name:'Action',id:3}]
 
     useEffect(() => {
         dispatch(getAllLeaveEntries())
     }, [])
-    
+    // console.log(leaveDayEntries)
+    //using context
+    const {leaveData, setLeaveData}= useContext(LeaveEntryContext)
+
 
     // const [rowVal,setRowVal]=useState([{name:'kuddus', age:12},{name:'belal', age:15}])
   return (
@@ -45,6 +51,7 @@ const LeaveEntryList = () => {
                     <TableCell align="right">{index+1}</TableCell>
                     <TableCell align="center">{leave.leaveName}</TableCell>
                     <TableCell align="center">{leave.balanceDays}</TableCell>
+                    <TableCell align="center"><EditButton onClick={()=>setLeaveData(leave)}>Modify</EditButton></TableCell>
                   </TableRow>
                 ))}
               </TableBody>

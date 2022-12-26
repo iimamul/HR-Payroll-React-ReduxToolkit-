@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import './LeaveEntryInputs.css'
 import { CancelButton, SaveButton } from '../../components/form-field/FormButton'
 import InputField from '../../components/form-field/InputField'
@@ -8,28 +8,35 @@ import * as Yup from 'yup';
 
 import { useDispatch } from 'react-redux'
 // import { addLeave } from './leaveEntrySlice'
-import { addNewLeave } from './leaveEntrySlice'
+import { addNewLeave,updateLeave } from './leaveEntrySlice'
+import { LeaveEntryContext } from './LeaveEntryContext'
 
 
 const initialValue={
+  id:0,
   leaveName:'',
-  balanceDays:0
+  balanceDays:''
 }
 
 const LeaveEntryInputs = () => {
+  //using context
+  const {leaveData, setLeaveData}= useContext(LeaveEntryContext)
 
   // const leaveEntryList = useSelector((state) => state.leaveEntries)
   const dispatch = useDispatch()
 
 
   const formik=useFormik({
-    initialValues:initialValue,
+    initialValues:initialValue || leaveData,
     onSubmit:()=>{
       try {
             // console.log(formik.values)
             // dispatch(addLeave(formik.values))
             // leaveEntryList.status="loading"
-            dispatch(addNewLeave(formik.values))
+            if(formik.values.id==0)
+              dispatch(addNewLeave(formik.values))
+            else
+              dispatch(updateLeave(formik.values))
             formik.resetForm(initialValue)
       } catch (err) {
             console.error('Failed to save the post', err)
@@ -41,15 +48,21 @@ const LeaveEntryInputs = () => {
     },
     validationSchema: Yup.object({
       leaveName: Yup.string()
-            .max(10, 'Leave Name must be 10 charcter or less')
+            .max(20, 'Leave Name must be 20 charcter or less')
             .required('Leave Name is Required'),
       balanceDays: Yup.number()
             .required('Allowed days is Required')
-            .max(20,'Max value should be 30'),
+            .max(30,'Max value should be 30'),
     })
   })
 
- 
+  //set context value on edit
+   useEffect(() => {
+    console.log(leaveData)
+    formik.setValues(leaveData)
+  }, [leaveData])
+
+
   return (
     <>   
       <Paper style={{padding:'1rem', width:'30%'}}>
@@ -59,9 +72,10 @@ const LeaveEntryInputs = () => {
               name='leaveName'
               className='inputBox'
               label='Leave Name' 
+              type='text'
               onChange={formik.handleChange}
               // onBlur={formik.handleBlur} 
-              value={formik.values.firstName}
+              value={formik.values.leaveName}
             /> 
             {formik.touched.leaveName && formik.errors.leaveName ? ( <div>{formik.errors.leaveName}</div>) : null}
             
