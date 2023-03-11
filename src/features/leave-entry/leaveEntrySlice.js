@@ -39,7 +39,7 @@ export const updateLeave = createAsyncThunk("leaveEntries/updateLeave", async (l
   try{
     console.log(leave)
     const data= await updateLeaveBalance(leave)
-    // console.log(newLeave)
+    console.log(newLeave)
     return data
   } 
   catch(err){

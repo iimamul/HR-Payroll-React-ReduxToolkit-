@@ -13,8 +13,8 @@ const LeaveEntryLayout = () => {
   return (
     <div style={{display: 'flex',flexDirection: 'row', paddingTop: '3rem'}}>
       <LeaveEntryContext.Provider value={{leaveData,setLeaveData}}>
-          <LeaveEntryInputs leaveData={leaveData}/>
-          <LeaveEntryList setLeaveData={setLeaveData}/>
+          <LeaveEntryInputs/>
+          <LeaveEntryList/>
       </LeaveEntryContext.Provider>
     </div>
   )

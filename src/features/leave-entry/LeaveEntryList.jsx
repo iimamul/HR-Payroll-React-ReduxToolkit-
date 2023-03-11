@@ -7,10 +7,13 @@ import { LeaveEntryContext } from './LeaveEntryContext'
 import { useContext } from 'react'
 
 const LeaveEntryList = () => {
+    // getting employees from store
+    const employeeList = useSelector((state) => state.employeeStored)
+
     const leaveDayEntries= useSelector((state)=>state.leaveEntriesStored)
     const dispatch = useDispatch()
 
-    const headers=[{name:'Leave Name',id:1},{name:'Balance Days',id:2},{name:'Action',id:3}]
+    const headers=[{name:'Leave Name',id:1},{name:'Balance Days',id:2},{name:'Employee',id:3},{name:'Action',id:4}]
 
     useEffect(() => {
         dispatch(getAllLeaveEntries())
@@ -51,7 +54,8 @@ const LeaveEntryList = () => {
                     <TableCell align="right">{index+1}</TableCell>
                     <TableCell align="center">{leave.leaveName}</TableCell>
                     <TableCell align="center">{leave.balanceDays}</TableCell>
-                    <TableCell align="center"><EditButton onClick={()=>setLeaveData(leave)}>Modify</EditButton></TableCell>
+                    <TableCell align="center">{ leave.employeeName}</TableCell>
+                    <TableCell align="center"><EditButton onClick={()=>{setLeaveData(leave);console.log(leave)}}>Modify</EditButton></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
