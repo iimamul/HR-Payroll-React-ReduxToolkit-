@@ -16,7 +16,7 @@ import { getAllEmployees } from '../employee-setup/employeeSlice'
 import Autocomplete from '@mui/material/Autocomplete';
 
 const initialValue={
-  employeeId: 0,
+  employeeId: null,
   employeeName: '',
   leaveName:'',
   balanceDays:''
@@ -85,29 +85,24 @@ const LeaveEntryInputs = () => {
             <br/>
             <Autocomplete
                 name="selectEmployee"
-                value={formik.values.employeeId}
-                isOptionEqualToValue={(option, value) => option.employeeId === value}
-                onChange={(event, newValue) => {
-                  // formik.handleChange
-                  formik.setFieldValue('employeeId', newValue.employeeId);
-                  console.log(formik.values)
-
-                }}
+                value={formik.values.employeeId || null}
                 options={employeeList.employees}
-                getOptionLabel={(employee) => employee.employeeName?? ""}
+                getOptionLabel={(option) => option.employeeName ?? "" }
+                isOptionEqualToValue={(option, value) => option.id === value}
+                onChange={(event, newValue) => {
+                  formik.setFieldValue('employeeId', newValue?.id);
+                }}
                 sx={{ width: 'auto' }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="Select Employee"
-                    error={formik.touched.employee && !!formik.errors.employee}
-                    helperText={formik.touched.employee && formik.errors.employee}
+                    error={formik.touched.employeeId && !!formik.errors.employeeId}
+                    helperText={formik.touched.employeeId && formik.errors.employeeId}
                   />
                 )}
-              />
-              {/* {formik.touched.selectEmployee && formik.errors.selectEmployee ? (
-                <div>{formik.errors.selectEmployee.employeeName}</div>
-              ) : null} */}
+            />
+
 
             <InputField 
               name='leaveName'
