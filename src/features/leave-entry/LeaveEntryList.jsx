@@ -55,7 +55,7 @@ const LeaveEntryList = () => {
                     <TableCell align="center">{leave.leaveName}</TableCell>
                     <TableCell align="center">{leave.balanceDays}</TableCell>
                     <TableCell align="center">{ leave.employeeName}</TableCell>
-                    <TableCell align="center"><EditButton onClick={()=>{setLeaveData(leave);console.log(leave)}}>Modify</EditButton></TableCell>
+                    <TableCell align="center"><EditButton onClick={()=>setLeaveData(leave)}>Modify</EditButton></TableCell>
                   </TableRow>
                 ))}
               </TableBody>

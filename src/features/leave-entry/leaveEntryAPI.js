@@ -10,7 +10,7 @@ export function fetchLeaveEntries(){
               //   title: "iPhone 9"
               // }
             }).then((function (response) {
-              console.log(response.data)
+              // console.log(response.data)
               return response.data
              
             })).catch(function (error) {

@@ -16,7 +16,8 @@ import { getAllEmployees } from '../employee-setup/employeeSlice'
 import Autocomplete from '@mui/material/Autocomplete';
 
 const initialValue={
-  employeeId: null,
+  employee: null,
+  employeeId: 0,
   employeeName: '',
   leaveName:'',
   balanceDays:''
@@ -85,17 +86,23 @@ const LeaveEntryInputs = () => {
             <br/>
             <Autocomplete
                 name="selectEmployee"
-                value={formik.values.employeeId || null}
+                value={formik.values.employee 
+                        || employeeList.employees.find(employee => employee.id === formik.values.employeeId)
+                        || null
+                      }
                 options={employeeList.employees}
                 getOptionLabel={(option) => option.employeeName ?? "" }
-                isOptionEqualToValue={(option, value) => option.id === value}
+                isOptionEqualToValue={(option, value) => option === value}
                 onChange={(event, newValue) => {
-                  formik.setFieldValue('employeeId', newValue?.id);
+                  formik.handleChange
+                  formik.setFieldValue('employee', newValue || null);
+                  formik.setFieldValue('employeeId', newValue?.id || 0);
                 }}
                 sx={{ width: 'auto' }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
+                    // value={formik.values.employee?.employeeName || ''}
                     label="Select Employee"
                     error={formik.touched.employeeId && !!formik.errors.employeeId}
                     helperText={formik.touched.employeeId && formik.errors.employeeId}
