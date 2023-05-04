@@ -3,7 +3,7 @@ import React, { lazy, Suspense } from "react";
 // import LeaveEntryLayout from '../features/leave-entry/LeaveEntryLayout';
 // import Header from "../components/layout/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Loading from "/src/components/layout/Loading";
+import Loading from "/src/components/ui/Loading";
 
 const Header = lazy(() =>
   import("../components/layout/Header")
