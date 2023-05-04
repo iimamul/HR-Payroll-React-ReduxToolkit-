@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk,current } from '@reduxjs/toolkit'
-import {fetchLeaveEntries,addNewLeaveBalance,updateLeaveBalance} from './leaveEntryAPI'
+import {fetchLeaveEntries,addNewLeaveBalance,updateLeaveBalance} from '/src/api/leaveAPI'
 // import axios from 'axios'
 
 const initialState = {

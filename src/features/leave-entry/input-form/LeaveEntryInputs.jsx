@@ -1,18 +1,18 @@
 import React, { useState, useContext,useEffect } from 'react'
 import './LeaveEntryInputs.css'
-import { CancelButton, SaveButton } from '../../components/form-field/FormButton'
-import InputField from '../../components/form-field/InputField'
+import { CancelButton, SaveButton } from '/src/components/form-field/FormButton.jsx'
+import InputField from '/src/components/form-field/InputField.jsx'
 import { Paper} from '@mui/material'
 import { useFormik } from 'formik'
 import * as Yup from 'yup';
 
 import { useDispatch,useSelector } from 'react-redux'
 // import { addLeave } from './leaveEntrySlice'
-import { addNewLeave,updateLeave } from './leaveEntrySlice'
-import { LeaveEntryContext } from './LeaveEntryContext'
-import AutoCompleteField from '../../components/form-field/AutoCompleteField'
+import { addNewLeave,updateLeave } from '../leaveEntrySlice'
+import { LeaveEntryContext } from '../LeaveEntryContext'
+import AutoCompleteField from '/src/components/form-field/AutoCompleteField'
 import { TextField } from '@mui/material'
-import { getAllEmployees } from '../employee-setup/employeeSlice'
+import { getAllEmployees } from '../../employee-setup/employeeSlice'
 import Autocomplete from '@mui/material/Autocomplete';
 
 const initialValue={
@@ -22,6 +22,7 @@ const initialValue={
   leaveName:'',
   balanceDays:''
 }
+
 
 const LeaveEntryInputs = () => {
   //using context

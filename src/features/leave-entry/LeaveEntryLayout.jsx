@@ -1,5 +1,5 @@
-import LeaveEntryInputs from './LeaveEntryInputs'
-import LeaveEntryList from './LeaveEntryList'
+import LeaveEntryInputs from './input-form/LeaveEntryInputs'
+import LeaveEntryList from './leave-list/LeaveEntryList'
 import { LeaveEntryContext } from './LeaveEntryContext'
 import { useState } from 'react'
 

@@ -1,9 +1,9 @@
 import React,{useEffect} from 'react'
 import { Paper,Table,TableContainer,TableHead,TableRow,TableCell,TableBody } from '@mui/material'
 import { useSelector,useDispatch } from 'react-redux'
-import {getAllLeaveEntries} from './leaveEntrySlice'
-import {EditButton} from '../../components/form-field/FormButton'
-import { LeaveEntryContext } from './LeaveEntryContext'
+import {getAllLeaveEntries} from '../leaveEntrySlice'
+import {EditButton} from '/src/components/form-field/FormButton.jsx'
+import { LeaveEntryContext } from '../LeaveEntryContext'
 import { useContext } from 'react'
 
 const LeaveEntryList = () => {
