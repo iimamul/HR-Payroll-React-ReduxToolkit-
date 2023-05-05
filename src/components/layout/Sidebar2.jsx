@@ -14,7 +14,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Divider from "@mui/material/Divider";
 
-const Sidebar = () => {
+const Sidebar2 = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
@@ -57,4 +57,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Sidebar2;

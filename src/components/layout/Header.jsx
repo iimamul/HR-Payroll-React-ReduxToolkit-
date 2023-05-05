@@ -4,7 +4,7 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useState } from 'react';
-import Sidebar from './Sidebar';
+import Sidebar2 from './Sidebar2';
 const Header = () => {
     const [value, setvalue] = useState(0)
   return (
@@ -12,7 +12,7 @@ const Header = () => {
         <AppBar sx={{background:'#425F57'}}>
             <Toolbar>
                 <Diversity3Icon></Diversity3Icon>
-                <Sidebar/>
+                <Sidebar2/>
                 <Tabs sx={{marginLeft:'auto'}} textColor="inherit"  value={value} onChange={(e,value)=>setvalue(value)} indicatorColor='secondary'>
                     <Tab label="Home"></Tab>
                     <Tab label="Setup"></Tab>

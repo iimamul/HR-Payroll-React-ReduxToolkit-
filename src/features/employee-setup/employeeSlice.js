@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk,current } from '@reduxjs/toolkit'
-import {fetchEmployees} from './employeeAPI'
+import {fetchEmployees} from '/src/api/employeeAPI'
 // import axios from 'axios'
 
 const initialState = {
